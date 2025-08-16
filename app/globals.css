@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b1220;
+  --card: #0f172a;
+  --muted: #94a3b8;
+  --text: #e2e8f0;
+}
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+  background-attachment: fixed; /* prevents a dark band at the bottom on short pages */
+  color: var(--text);
+}
+
+.card {
+  @apply rounded-2xl shadow-lg border border-white/10 bg-slate-900/50 backdrop-blur;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium transition;
+}
+.btn-primary {
+  @apply btn bg-brand-500 hover:bg-brand-600 text-white;
+}
+.btn-ghost {
+  @apply btn bg-white/5 hover:bg-white/10 text-white;
+}
+
+/* Buttons */
+.btn-secondary {
+  @apply btn bg-white/10 hover:bg-white/20 text-white;
+}
+.btn-danger {
+  @apply btn bg-red-600 hover:bg-red-700 text-white;
+}
+
+/* Labels & form controls mapped to class names we use in components */
+.form-label {
+  @apply block text-sm text-slate-300 mb-1;
+}
+.input,
+.select,
+.textarea {
+  @apply w-full bg-slate-800/70 border border-white/10 rounded-xl px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500;
+}
+
+/* Base look for raw form elements (class-based .input/.select/.textarea above take precedence) */
+input, select, textarea {
+  @apply bg-slate-800/60 border border-white/10 rounded-xl px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500;
+}
+
+select { min-width: 8rem; }
+
+table {
+  @apply w-full text-left;
+}
+th {
+  @apply text-slate-300 font-semibold pb-2;
+}
+td {
+  @apply py-2 border-t border-white/5;
+}
+
+.filter-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3;
+}
+
+/* Safety: hide any stray full-width overlays that could appear as a dark strip */
+.footer-gradient,
+.modal-backdrop,
+.page-footer-shadow,
+body::after {
+  content: none !important;
+  display: none !important;
+}
