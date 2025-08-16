@@ -2,4 +2,9 @@ node_modules/
 .next/
 .env
 dist/
+.DS_Storenode_modules/
+.next/
+.env
 .DS_Store
+dist/
+
