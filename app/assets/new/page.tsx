@@ -85,7 +85,7 @@ export default function NewAssetPage() {
             <select id="status" name="status" className="input default:cursor-pointer">
               <option>In Stock</option>
               <option>Assigned</option>
-              <option>In Repair</option>
+              <option>Repair</option>
               <option>Retired</option>
             </select>
           </div>
