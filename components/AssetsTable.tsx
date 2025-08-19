@@ -334,12 +334,15 @@ export default function AssetsTable({ rows, page, total, pageSize }: Props) {
         if (!res.ok) throw new Error("single delete failed");
       } else if (confirmMode === "bulk") {
         if (selectedIds.length === 0) return;
-        const res = await fetch("/api/assets/bulk", {
+        const res = await fetch("/api/assets", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ids: selectedIds }),
         });
-        if (!res.ok) throw new Error("bulk delete failed");
+        if (!res.ok) {
+          const err = await res.json().catch(() => null);
+          throw new Error(err?.error || "bulk delete failed");
+        }
       }
       setConfirmOpen(false);
       setConfirmSingleId(null);
@@ -354,11 +357,11 @@ export default function AssetsTable({ rows, page, total, pageSize }: Props) {
 
   return (
     <div className="rounded-xl bg-slate-900/40 ring-1 ring-white/10 p-4">
-      <div className="overflow-x-auto">
-        <table className="min-w-full text-sm">
-          <thead className="sticky top-0 z-10 bg-slate-900/80 backdrop-blur text-left text-slate-300">
+      <div>
+        <table className="w-full table-fixed text-sm">
+          <thead className="sticky top-0 z-10 bg-slate-900/80 backdrop-blur text-left text-slate-300 text-wrap">
             <tr>
-              <th className="px-4 py-3">
+              <th className="px-3 py-3 align-top w-6">
                 <input
                   type="checkbox"
                   aria-label="Select all"
@@ -366,36 +369,36 @@ export default function AssetsTable({ rows, page, total, pageSize }: Props) {
                   onChange={toggleAll}
                 />
               </th>
-              <th className="px-4 py-3">
+              <th className="px-3 py-3 align-top">
                 <button className="inline-flex items-center gap-1" onClick={() => setSort("name")} aria-label="Sort by name">
                   Name <span className="opacity-70">{sortIcon("name")}</span>
                 </button>
               </th>
-              <th className="px-4 py-3">
+              <th className="px-3 py-3 align-top">
                 <button className="inline-flex items-center gap-1" onClick={() => setSort("type")} aria-label="Sort by type">
                   Type <span className="opacity-70">{sortIcon("type")}</span>
                 </button>
               </th>
-              <th className="px-4 py-3">Serial</th>
-              <th className="px-4 py-3">QR</th>
-              <th className="px-4 py-3">
+              <th className="px-3 py-3 align-top">Serial</th>
+              <th className="px-3 py-3 align-top w-[56px]">QR</th>
+              <th className="px-3 py-3 align-top">
                 <button className="inline-flex items-center gap-1" onClick={() => setSort("created")} aria-label="Sort by created">
                   Created <span className="opacity-70">{sortIcon("created")}</span>
                 </button>
               </th>
-              <th className="px-4 py-3">
+              <th className="px-3 py-3 align-top">
                 <button className="inline-flex items-center gap-1" onClick={() => setSort("status")} aria-label="Sort by status">
                   Status <span className="opacity-70">{sortIcon("status")}</span>
                 </button>
               </th>
-              <th className="px-4 py-3">Assigned</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+              <th className="px-3 py-3 align-top">Assigned</th>
+              <th className="px-3 py-3 align-top w-[200px] text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800 text-slate-100">
             {displayRows.map((r) => (
               <tr key={r._id} className="group hover:bg-slate-800/40">
-                <td className="px-4 py-3">
+                <td className="px-3 py-3 align-top">
                   <input
                     type="checkbox"
                     aria-label={`Select ${r.name}`}
@@ -403,12 +406,12 @@ export default function AssetsTable({ rows, page, total, pageSize }: Props) {
                     onChange={() => toggleOne(r._id)}
                   />
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap">{r.name}</td>
-                <td className="px-4 py-3 whitespace-nowrap">{resolveType(r)}</td>
-                <td className="px-4 py-3 whitespace-nowrap">
+                <td className="px-3 py-3 align-top whitespace-normal break-words max-w-[14rem]">{r.name}</td>
+                <td className="px-3 py-3 align-top whitespace-normal break-words max-w-[8rem]">{resolveType(r)}</td>
+                <td className="px-3 py-3 align-top whitespace-normal break-words max-w-[10rem]">
                   {r.serialNumber || "–"}
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap">
+                <td className="px-3 py-3 align-top w-[56px]">
                   <div
                     id={`qr-${r._id}`}
                     className="inline-flex h-10 w-10 items-center justify-center rounded bg-white"
@@ -424,14 +427,14 @@ export default function AssetsTable({ rows, page, total, pageSize }: Props) {
                     </button>
                   </div>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap">{fmtDate(r.createdAt)}</td>
-                <td className="px-4 py-3 whitespace-nowrap">
+                <td className="px-3 py-3 align-top whitespace-nowrap">{fmtDate(r.createdAt)}</td>
+                <td className="px-3 py-3 align-top">
                   <StatusBadge s={r.status} />
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap">
+                <td className="px-3 py-3 align-top whitespace-normal break-words max-w-[10rem]">
                   {r.assignedTo || "–"}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-3 py-3 align-top w-[200px]">
                   <div className="flex justify-end gap-2 opacity-100 group-hover:opacity-100 md:opacity-0 transition-opacity">
                     <Link href={`/assets/${r._id}`} className="btn btn-ghost" aria-label={`View ${r.name}`}>
                       View
