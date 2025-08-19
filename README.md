@@ -1,4 +1,4 @@
-# IT Asset Teaching SaaS (Next.js + Auth.js v5 + MongoDB Atlas)
+# IT Asset Tracker (Next.js + Auth.js v5 + MongoDB Atlas)
 
 A clean, modern, **fully functional** IT asset tracking SaaS starter.
 - Next.js App Router (TypeScript) + Tailwind
