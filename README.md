@@ -39,3 +39,9 @@ A clean, modern, **fully functional** IT asset tracking SaaS starter.
 ---
 
 MIT License
+
+![715313AE-6600-41A7-9446-7C7413051A5B_1_201_a](https://github.com/user-attachments/assets/62b7ed14-091d-4482-bab5-4555cce20eb2)
+![50D18E6D-59EC-4A76-A9F8-8B1B898D1503_1_201_a](https://github.com/user-attachments/assets/ebd745d3-0547-4a61-8680-f75fe454c670)
+![D6F7B53A-F56E-4BC8-8F01-B383BE7B2246_1_201_a](https://github.com/user-attachments/assets/97aff9c3-3668-48a2-b4c8-97b55c30ab9a)
+![5A6C72F8-41DD-494F-8794-10431560B78A_1_201_a](https://github.com/user-attachments/assets/cfdd8478-15de-45c3-b582-69cbb03bfee9)
+
